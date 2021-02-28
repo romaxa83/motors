@@ -1,0 +1,14 @@
+query {
+    users {
+        paginatorInfo {
+            total
+            perPage
+            currentPage
+        }
+        data {
+            id
+            name
+            email
+        }
+    }
+}

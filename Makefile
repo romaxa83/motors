@@ -13,7 +13,7 @@ redis_container = ${APP_NAME}__redis
 #=====MAIN_COMMAND=====================
 
 .PHONY: init
-init: down-clear cp-env up_docker app-init ps info
+init: down-clear up_docker app-init ps info
 
 .PHONY: up
 up: up_docker info
@@ -60,6 +60,7 @@ project-init:
 	docker-compose run --rm php-fpm php artisan key:generate
 	docker-compose run --rm php-fpm php artisan ide-helper:generate
 	docker-compose run --rm php-fpm php artisan ide-helper:meta
+	docker-compose run --rm php-fpm php artisan lighthouse:ide-helper
 	docker-compose run --rm php-fpm php artisan migrate
 	#docker-compose run --rm php-fpm php artisan db:seed
 
@@ -87,5 +88,6 @@ test_app_init:
 info:
 	echo '------------------------------------------------------';
 	echo ${APP_URL};
+	echo ${APP_URL}'/graphql-playground';
 
 .DEFAULT_GOAL := init
