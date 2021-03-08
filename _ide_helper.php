@@ -1745,7 +1745,7 @@
                     /**
          * Get the currently authenticated user.
          *
-         * @return \App\Models\User|null 
+         * @return \App\Models\User\User|null 
          * @static 
          */ 
         public static function user()
@@ -1780,7 +1780,7 @@
          * Log the given user ID into the application without sessions or cookies.
          *
          * @param mixed $id
-         * @return \App\Models\User|false 
+         * @return \App\Models\User\User|false 
          * @static 
          */ 
         public static function onceUsingId($id)
@@ -1844,7 +1844,7 @@
          *
          * @param mixed $id
          * @param bool $remember
-         * @return \App\Models\User|false 
+         * @return \App\Models\User\User|false 
          * @static 
          */ 
         public static function loginUsingId($id, $remember = false)
@@ -1919,7 +1919,7 @@
                     /**
          * Get the last user we attempted to authenticate.
          *
-         * @return \App\Models\User 
+         * @return \App\Models\User\User 
          * @static 
          */ 
         public static function getLastAttempted()
@@ -2021,7 +2021,7 @@
                     /**
          * Return the currently cached user.
          *
-         * @return \App\Models\User|null 
+         * @return \App\Models\User\User|null 
          * @static 
          */ 
         public static function getUser()
@@ -2067,7 +2067,7 @@
                     /**
          * Determine if the current user is authenticated. If not, throw an exception.
          *
-         * @return \App\Models\User 
+         * @return \App\Models\User\User 
          * @throws \Illuminate\Auth\AuthenticationException
          * @static 
          */ 
@@ -15405,6 +15405,17 @@
      
 }
 
+    namespace Nuwave\Lighthouse { 
+            /**
+     * 
+     *
+     */ 
+        class GraphQL {
+         
+    }
+     
+}
+
     namespace Illuminate\Http { 
             /**
      * 
@@ -18619,6 +18630,7 @@ namespace  {
             class View extends \Illuminate\Support\Facades\View {}
             class Debugbar extends \Barryvdh\Debugbar\Facade {}
             class Flare extends \Facade\Ignition\Facades\Flare {}
+            class graphql extends \Nuwave\Lighthouse\GraphQL {}
      
 }
 

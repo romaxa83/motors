@@ -58,11 +58,10 @@ composer-install:
 
 project-init:
 	docker-compose run --rm php-fpm php artisan key:generate
-	docker-compose run --rm php-fpm php artisan ide-helper:generate
-	docker-compose run --rm php-fpm php artisan ide-helper:meta
-	docker-compose run --rm php-fpm php artisan lighthouse:ide-helper
 	docker-compose run --rm php-fpm php artisan migrate
-	#docker-compose run --rm php-fpm php artisan db:seed
+	docker-compose run --rm php-fpm php artisan am:init
+	docker-compose run --rm php-fpm php artisan db:seed
+	docker-compose run --rm php-fpm composer ide
 
 perm:
 	sudo chmod 777 -R storage

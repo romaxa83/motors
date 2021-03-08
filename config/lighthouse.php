@@ -118,9 +118,16 @@ return [
     */
 
     'namespaces' => [
-        'models' => ['App', 'App\\Models'],
+        'models' => [
+            'App',
+            'App\\Models',
+            'App\\Models\\User',
+        ],
         'queries' => 'App\\GraphQL\\Queries',
-        'mutations' => 'App\\GraphQL\\Mutations',
+        'mutations' => [
+            'App\\GraphQL\\Mutations',
+            'App\\GraphQL\\Mutations\\User'
+        ],
         'subscriptions' => 'App\\GraphQL\\Subscriptions',
         'interfaces' => 'App\\GraphQL\\Interfaces',
         'unions' => 'App\\GraphQL\\Unions',

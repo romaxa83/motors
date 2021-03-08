@@ -4,15 +4,58 @@ scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 "A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
 scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
+type Mutation {
+    createUser(input: CreateUserInput! @spread): User!
+    updateUser(id: ID!, name: String, email: String, password: String): User!
+    deleteUser(id: ID!): ResponseDelete!
+}
+
+input CreateUserInput {
+    name: String!,
+    email: String!,
+    password: String!
+}
+
+type ResponseDelete {
+    status: String!,
+    message: String!
+}
+
 type Query {
-    users: [User!]! @paginate(defaultCount: 10)
+    users(
+        orderBy: _ @orderBy(columns: ["name", "created_at", "id"])
+        where: _ @whereConditions(columns: ["name", "email", "id"])
+    ): [User!] @paginate(defaultCount: 10, scopes: ["notAdmin"])
+    usersList: [User!] @all(scopes: ["notAdmin"])
     user(id: ID @eq): User @find
+
+    roles: [Role!] @paginate(defaultCount: 10)
+    role(id: ID @eq): Role @find
+
+    role_translations: [RoleTranslation!] @paginate(defaultCount: 10)
+    role_translation(id: ID @eq): RoleTranslation @find
 }
 
 type User {
     id: ID!
     name: String!
     email: String!
+    roles: [Role]!
     created_at: DateTime!
     updated_at: DateTime!
 }
+
+type Role {
+    id: ID!
+    alias: String!
+    translation: [RoleTranslation]
+    translations: [RoleTranslation]
+}
+
+type RoleTranslation {
+    locale: String!
+    name: String!
+    desc: String
+}
+
+
